@@ -1,0 +1,56 @@
+{
+  "name": "a-soul-docs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "一键生成monorepo前端项目架构模板",
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "scripts": {
+    "predocs": "node ./scripts/setRouterConfig.mjs",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "docs": "vitepress dev .",
+    "docs:build": "vitepress build ."
+  },
+  "dependencies": {
+    "vitepress": "1.0.0-alpha.48"
+  },
+  "volta": {
+    "node": "18.15.0",
+    "pnpm": "7.29.1"
+  },
+  "lint-staged": {
+    "*.{js,vue,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "node scripts/verifyCommit.mjs"
+  },
+  "devDependencies": {
+    "chalk": "^5.2.0",
+    "conventional-changelog-cli": "^2.2.2",
+    "core-js": "^3.29.1",
+    "execa": "^7.1.1",
+    "lint-staged": "^13.2.0",
+    "minimist": "^1.2.8",
+    "p-series": "^3.0.0",
+    "prettier": "2.8",
+    "prompts": "^2.4.2",
+    "semver": "^7.3.8",
+    "yorkie": "^2.0.0"
+  },
+  "author": "A SOUL",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/140948940/a-soul-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/140948940/a-soul-blog/issues"
+  },
+  "homepage": "https://140948940.github.io/a-soul-blog/"
+}
