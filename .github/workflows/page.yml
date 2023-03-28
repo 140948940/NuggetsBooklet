@@ -18,16 +18,16 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.2.1
-        with:
-          version: 7.1.7
+      # - uses: pnpm/action-setup@v2.2.1
+      #   with:
+      #     version: 7.1.7
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
-          cache: 'pnpm'
+          cache: 'npm'
         # forks do not have access to secrets so just skip this
-      - run: pnpm install --no-frozen-lockfile
-      - run: pnpm run docs:build
+      - run: npm install
+      - run: npm run docs:build
 
 
       - uses: actions/configure-pages@v2
