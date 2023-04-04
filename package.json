@@ -1,6 +1,6 @@
 {
   "name": "a-soul-docs",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "一键生成monorepo前端项目架构模板",
   "engines": {
