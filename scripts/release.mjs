@@ -248,10 +248,10 @@ async function main() {
     await runIfNotDry("git", ["tag", `${tagName}`]);
   }
 
-  step("\nPublishing packages...");
-  for (const pkg of pkgWithVersions) {
-    await publishPackage(pkg);
-  }
+  // step("\nPublishing packages...");
+  // for (const pkg of pkgWithVersions) {
+  //   await publishPackage(pkg);
+  // }
 
   step("\nPushing to Github...");
   await runIfNotDry("git", ["push", "origin", ...versionsToPush]);
