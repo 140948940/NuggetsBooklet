@@ -7,12 +7,13 @@
     "node": "^14.18.0 || >=16.0.0"
   },
   "scripts": {
-    "predocs": "node ./scripts/setRouterConfig.mjs",
+    "dev": "node ./scripts/preDoc.mjs",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "docs": "vitepress dev .",
-    "docs:build": "vitepress build ."
+    "docs:build": "node ./scripts/setRouterConfig.mjs && vitepress build ."
   },
   "dependencies": {
+    "chokidar": "^3.5.3",
     "vitepress": "^1.0.0-alpha.64"
   },
   "volta": {

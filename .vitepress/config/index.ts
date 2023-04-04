@@ -1,6 +1,10 @@
 import { defineConfig } from 'vitepress'
 import { sharedConfig } from './shared'
 import { zhConfig } from './zh'
+// export default {
+//   // ...other Vite config options...
+
+// };
 // function updateBlogsRoute() {
 //   return {
 //     name: 'update-blogs-route-plugin',

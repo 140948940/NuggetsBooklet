@@ -83,8 +83,7 @@ export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
 
   themeConfig: {
     editLink: {
-      pattern:
-        'https://github.com/140948940/a-soul-blog/edit/main/packages/docs/:path',
+      pattern: 'https://github.com/140948940/a-soul-blog/edit/main/:path',
       text: '对本页提出修改建议',
     },
 
