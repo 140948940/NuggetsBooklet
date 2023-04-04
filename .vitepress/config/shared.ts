@@ -32,7 +32,7 @@ const getIcon: getIconType = function (imgUrl, title) {
   }
 }
 export const sharedConfig = defineConfig({
-  title: 'Watermark Page',
+  title: 'A SOUL BLOG',
   appearance: 'dark',
 
   markdown: {
