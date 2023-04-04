@@ -4,6 +4,7 @@
 ### Bug Fixes
 
 * 使用npm设置github-pages ([2264abb](https://github.com/140948940/a-soul-blog/commit/2264abb64f9b29628868e7ab086264c1cf898274))
+* release修改 ([868a688](https://github.com/140948940/a-soul-blog/commit/868a6888edc9560737cb99a82afc240533c888d3))
 * release修改 ([d7bc117](https://github.com/140948940/a-soul-blog/commit/d7bc117e8b9a7dadc2aadc8ce921fcda7f48e198))
 
 
