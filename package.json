@@ -13,7 +13,7 @@
     "docs:build": "vitepress build ."
   },
   "dependencies": {
-    "vitepress": "1.0.0-alpha.48"
+    "vitepress": "^1.0.0-alpha.64"
   },
   "volta": {
     "node": "18.15.0",

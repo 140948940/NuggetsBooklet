@@ -13,8 +13,8 @@ hero:
   #  alt: A SOUL BLOG
   actions:
     - theme: brand
-      text: 
-      link: /introduction
+      text: 开始
+      link: /blogs/demo.md
 
 #features:
 #  - title: 🌐 支持自动编码
