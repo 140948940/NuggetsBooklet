@@ -32,37 +32,79 @@ const gRoutes = generateRoutes as gRouteType
 //   }
 // })
 // console.log('nav', nav)
-const sidebarArr = gRoutes.map((item, index) => {
-  let obj = {
-    name: item.name,
-    // collapsible: index === 0,
-    type: item.type,
-    collapsed: item.type === 'file' ? null : true,
-    text: nameEnum[item.name] || item.name,
-    links: '/blogs/' + item.name + '/',
-    items: null,
-    link: item.type === 'file' ? '/blogs/' + item.name : null,
-    link2: null,
-  }
-
-  obj.items = item?.children?.map(t => {
-    return {
-      text: nameEnum[t.name] || t.name,
-      collapsible: true,
-      link: obj.links + t.name,
+function findBottomNode(node) {
+  if (!node.items || node.items.length === 0) {
+    return node
+  } else {
+    let deepestChild = null
+    for (let i = 0; i < node.items.length; i++) {
+      const child = node.items[i]
+      if (!deepestChild || child.path.length > deepestChild.path.length) {
+        deepestChild = child
+      }
     }
-  })
-  if (obj?.items && obj?.items[0]?.link) {
-    obj.link2 = obj.items[0].link || '/no-blog.md'
+    return findBottomNode(deepestChild)
   }
-  obj.link = obj.link || obj.link2
-  return obj
-})
+}
+function formatRoute(gRoutes, deep = 1, parentRoute = '/blogs') {
+  const arr = []
+  for (let i = 0; i < gRoutes.length; i++) {
+    const item = gRoutes[i]
+    const obj = {
+      name: item.name,
+      text: nameEnum[item.name] || item.name,
+      path: parentRoute + `/${item.name}`,
+      collapsed: item.type === 'file' ? null : true,
+      items: undefined,
+      link: undefined,
+      // link: item.type === 'file' ? ''/blogs'/' + item.name : null,
+    }
+    if (item.type === 'directory') {
+      if (item.children?.length) {
+        obj.items = formatRoute(item.children, deep + 1, obj.path)
+        obj.link = findBottomNode(obj).path || '/no-blog.md'
+      } else {
+        obj.link = '/no-blog.md'
+      }
+    } else {
+      obj.link = obj.path
+    }
+    arr[i] = obj
+  }
+  return arr
+}
+// const sidebarArr = gRoutes.map((item, index) => {
+//   let obj = {
+//     name: item.name,
+//     // collapsible: index === 0,
+//     type: item.type,
+//     collapsed: item.type === 'file' ? null : true,
+//     text: nameEnum[item.name] || item.name,
+//     links: '/blogs/' + item.name + '/',
+//     items: null,
+//     link: item.type === 'file' ? '/blogs/' + item.name : null,
+//     link2: null,
+//   }
+
+//   obj.items = item?.children?.map(t => {
+//     return {
+//       text: nameEnum[t.name] || t.name,
+//       collapsible: true,
+//       link: obj.links + t.name,
+//     }
+//   })
+//   if (obj?.items && obj?.items[0]?.link) {
+//     obj.link2 = obj.items[0].link || '/no-blog.md'
+//   }
+//   obj.link = obj.link || obj.link2
+//   return obj
+// })
+const sidebarArr = formatRoute(gRoutes)
 const nav = sidebarArr.map((item, index) => {
   // (cur?.items&&cur?.items[0]?.link)||'/no-blog.md'
+  console.log('sidebarArr', item)
   return {
-    text: item.text,
-    link: item.link || item.link2 || '/no-blog.md',
+    ...item,
     activeMatch: '^/' + item.name,
   }
 })

@@ -1,14 +1,23 @@
 import fs from 'fs'
 import path from 'path'
-import { execa } from 'execa'
-import { fileURLToPath } from 'url'
+import {
+  execa
+} from 'execa'
+import {
+  fileURLToPath
+} from 'url'
 import chokidar from 'chokidar'
 import minimist from 'minimist'
-const __filename = fileURLToPath(import.meta.url)
+const __filename = fileURLToPath(
+  import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const args = minimist(process.argv.slice(2))
-const { watchBlog } = args
+const {
+  watchBlog
+} = args
+const blacklist = ['.github', '.git', '.gitignore', 'README.md']
+
 function getDirectoryTree(dirPath) {
   const name = path.basename(dirPath)
   const stats = fs.statSync(dirPath)
@@ -17,9 +26,15 @@ function getDirectoryTree(dirPath) {
     type: stats.isDirectory() ? 'directory' : 'file',
   }
   if (stats.isDirectory()) {
-    tree.children = fs
-      .readdirSync(dirPath)
-      .map(child => getDirectoryTree(path.join(dirPath, child)))
+    const files = fs.readdirSync(dirPath)
+    files.sort((a, b) => a.localeCompare(b, undefined, {
+      numeric: true,
+      caseFirst: 'upper'
+    }));
+    const children = files
+      .filter(item => !blacklist.includes(item))
+      .map(child => getDirectoryTree(path.join(dirPath, child))).sort()
+    tree.children = children
   }
   return tree
 }
