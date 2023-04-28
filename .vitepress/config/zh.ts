@@ -19,30 +19,11 @@ enum nameEnum {
   Other = '其他',
 }
 const gRoutes = generateRoutes as gRouteType
-// { name: 'Js', type: 'directory', children: [] },
-// { name: 'React', type: 'directory', children: [] },
-// const nav = gRoutes.map((item, index) => {
-//   // (cur?.items&&cur?.items[0]?.link)||'/no-blog.md'
-//   return {
-//     text: nameEnum[item.name] || item.name,
-//     collapsible: index === 0,
-//     links: '/blogs/' + item.name+'/',
-//     link:
-//     activeMatch: '^/' + item.name,
-//   }
-// })
-// console.log('nav', nav)
 function findBottomNode(node) {
   if (!node.items || node.items.length === 0) {
     return node
   } else {
-    let deepestChild = null
-    for (let i = 0; i < node.items.length; i++) {
-      const child = node.items[i]
-      if (!deepestChild || child.path.length > deepestChild.path.length) {
-        deepestChild = child
-      }
-    }
+    let deepestChild = node.items[0]
     return findBottomNode(deepestChild)
   }
 }
@@ -57,12 +38,13 @@ function formatRoute(gRoutes, deep = 1, parentRoute = '/blogs') {
       collapsed: item.type === 'file' ? null : true,
       items: undefined,
       link: undefined,
-      // link: item.type === 'file' ? ''/blogs'/' + item.name : null,
     }
     if (item.type === 'directory') {
       if (item.children?.length) {
         obj.items = formatRoute(item.children, deep + 1, obj.path)
-        obj.link = findBottomNode(obj).path || '/no-blog.md'
+        if (!obj.link) {
+          obj.link = findBottomNode(obj).path || '/no-blog.md'
+        }
       } else {
         obj.link = '/no-blog.md'
       }
@@ -73,46 +55,13 @@ function formatRoute(gRoutes, deep = 1, parentRoute = '/blogs') {
   }
   return arr
 }
-// const sidebarArr = gRoutes.map((item, index) => {
-//   let obj = {
-//     name: item.name,
-//     // collapsible: index === 0,
-//     type: item.type,
-//     collapsed: item.type === 'file' ? null : true,
-//     text: nameEnum[item.name] || item.name,
-//     links: '/blogs/' + item.name + '/',
-//     items: null,
-//     link: item.type === 'file' ? '/blogs/' + item.name : null,
-//     link2: null,
-//   }
-
-//   obj.items = item?.children?.map(t => {
-//     return {
-//       text: nameEnum[t.name] || t.name,
-//       collapsible: true,
-//       link: obj.links + t.name,
-//     }
-//   })
-//   if (obj?.items && obj?.items[0]?.link) {
-//     obj.link2 = obj.items[0].link || '/no-blog.md'
-//   }
-//   obj.link = obj.link || obj.link2
-//   return obj
-// })
 const sidebarArr = formatRoute(gRoutes)
 const nav = sidebarArr.map((item, index) => {
-  // (cur?.items&&cur?.items[0]?.link)||'/no-blog.md'
-  console.log('sidebarArr', item)
   return {
     ...item,
-    activeMatch: '^/' + item.name,
+    activeMatch: '^' + item.path,
   }
 })
-const sidebar = {}
-console.log('sidebarArr', sidebarArr)
-// sidebarArr.forEach(item=>{
-//   sidebar[item.]
-// })
 export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description: META_DESCRIPTION,
   head: [
