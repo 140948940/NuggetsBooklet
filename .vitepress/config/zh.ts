@@ -33,7 +33,7 @@ function formatRoute(gRoutes, deep = 1, parentRoute = '/blogs') {
     const item = gRoutes[i]
     const obj = {
       name: item.name,
-      text: nameEnum[item.name] || item.name,
+      text: decodeURIComponent(item.name),
       path: parentRoute + `/${item.name}`,
       collapsed: item.type === 'file' ? null : true,
       items: undefined,
