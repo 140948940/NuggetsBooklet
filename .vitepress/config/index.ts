@@ -27,6 +27,18 @@ export default defineConfig({
     // gsRoute()
     // ]   // ]
   },
+  ignoreDeadLinks: [
+    // 忽略精确网址 "/playground"
+    // '/playground',
+    // 忽略所有 localhost 链接
+    /^https?:\/\/localhost/,
+    // 忽略所有包含 "/repl/" 的链接
+    // /\/repl\//,,
+    // 自定义函数，忽略所有包含 "ignore "的链接
+    // (url) => {
+    //   return url.toLowerCase().includes('ignore')
+    // }
+  ],
   locales: {
     root: { label: '简体中文', lang: 'zh-CN', link: '/', ...zhConfig },
   },
