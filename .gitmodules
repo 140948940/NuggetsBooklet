@@ -1,6 +1,3 @@
 [submodule "blogs/LiYn"]
 	path = blogs/LiYn
 	url = git@github.com:140948940/blog.git
-[submodule "blogs/xy-sea"]
-	path = blogs/xy-sea
-	url = https://github.com/140948940/xy-sea-blog
