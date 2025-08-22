@@ -4,3 +4,7 @@
 [submodule "blogs/xy-sea"]
 	path = blogs/xy-sea
 	url = git@github.com:140948940/xy-sea-blog.git
+[submodule "blogs/NuggetsBooklet"]
+	path = blogs/NuggetsBooklet
+	url = git@github.com:140948940/NuggetsBooklet.git
+	branch = master
