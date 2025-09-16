@@ -1,4 +1,4 @@
-﻿这节我们继续完善 playground 的功能。
+这节我们继续完善 playground 的功能。
 
 首先，我们预览出错时，iframe 会白屏，并不会显示错误。
 
@@ -47,7 +47,7 @@ export const Message: React.FC<MessageProps> = (props) => {
 
 这里 cotent 要作为 html 的方式设置到 pre 标签的标签体。
 
-React 里设置 html 要用 dangerouslySetInnerHTML={{\_html: 'xxx'}} 的方式。
+React 里设置 html 要用 `dangerouslySetInnerHTML={ {\_html: 'xxx'} }` 的方式。
 
 用 visible 的 state 控制显示隐藏，当传入内容的时候，设置 visible 为 true。
 
